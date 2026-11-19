@@ -1,9 +1,13 @@
 FILES=$(wildcard ./src/*.c)
 LINK=/usr/local/lib/raylib/
 INCLUDE=/usr/local/include/raylib
+FLAGS=-fsanitize=address -fsanitize=leak
 
 all:
-	gcc $(FILES) -I$(INCLUDE) -L$(LINK) -lraylib -lm  -o ./bin/teletype 
+	gcc  $(FILES) -I$(INCLUDE) -L$(LINK) -lraylib -lm  -o ./bin/teletype 
+
+debug: 
+	gcc $(FLAGS) $(FILES) -I$(INCLUDE) -L$(LINK) -lraylib -lm  -o ./bin/teletype 
 
 clean:
 	rm ./bin/teletype
